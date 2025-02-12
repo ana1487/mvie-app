@@ -1,0 +1,51 @@
+//need to make the display grid so that we can adjust the number of movies displayed per row based on the screen size.
+
+.movie-list-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); //ensures 5 rows of equal width when default size
+    gap: 20px; //adds a 20px gap between each movie card
+    justify-content: center;
+    padding: 20px; //adds 20px padding around the movie list
+
+
+    //These wil handle columns when the screen size is reduced
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 items per row on smaller screens */
+    }
+
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(3, 1fr); //three rows when screen is average
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: repeat(2, 1fr); //two rows when screen is small
+
+    }
+
+    @media (max-width: 400px) {
+        grid-template-columns: repeat(1, 1fr); //Only one row when screen is very small
+    }
+}
+
+.movie-card {
+    border: 1px solid #ccc; //adds a 1px border around each movie card
+    padding: 10px; //adds 10px padding inside each movie card
+    border-radius: 5px; //adds a 5px border radius to each movie card
+    text-align: center; //centers the text inside each movie card
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out; //adds a smooth transition effect when hovering over a movie card
+
+    &:hover {
+        transform: scale(1.05); //silight scale effect when hovering over a movie card
+    }
+
+    img {
+        width: 100%; // takes full card size
+        height: auto; //maintains the aspect ratio
+        border-radius: 5px;
+    }
+}
+
+/* Pagination styles */
+//will be added as per need after doing api calls
