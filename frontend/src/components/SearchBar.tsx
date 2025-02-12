@@ -9,7 +9,7 @@ const SearchBar = () => {
                 console.log(`Checking for the movie with this query: ${query}`);
                 //Will make api call here, check the movie with the query and display the result
             }
-        }, 500); //each 500ms, the api call will make the request as long as the query is not empty
+        }, 700); //each 700ms, the api call will make the request as long as the query is not empty
         return () => clearTimeout(delayCall); //Clear the timeout and make the api call again if needed
     }, [query]);
 

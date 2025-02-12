@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import MovieList from '../components/MovieList.tsx';
 import { Movie } from '../types/Movie.ts';
 import SearchBar from '../components/SearchBar.tsx';
+import Pagination from '../components/Pagination.tsx';
+
 
 
 function Home() {
@@ -75,13 +77,30 @@ function Home() {
             "imdbID": "tt2527338",
             "Type": "movie",
             "Poster": "https://m.media-amazon.com/images/M/MV5BODg5ZTNmMTUtYThlNy00NjljLWE0MGUtYmQ1NDg4NWU5MjQ1XkEyXkFqcGc@._V1_SX300.jpg"
-        }
+        }, {
+            "Title": "Star Wars: Episode IX - The Rise of Skywalker",
+            "Year": "2019",
+            "imdbID": "tt2527338",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BODg5ZTNmMTUtYThlNy00NjljLWE0MGUtYmQ1NDg4NWU5MjQ1XkEyXkFqcGc@._V1_SX300.jpg"
+        } //added a duplicate movie to test the dynamic web functionality
     ]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const moviesPerPage = 10; //can be changed to fit more movies in a page or less as needed
+
+    const indexOfLastMovie = currentPage * moviesPerPage;
+    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
     return (
         <div>
             <SearchBar />
-            <MovieList movies={movies} />
+            <MovieList movies={currentMovies} />
+            <Pagination totalMovies={movies.length}
+                moviesPerPage={moviesPerPage}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+            />
         </div>
     );
 }

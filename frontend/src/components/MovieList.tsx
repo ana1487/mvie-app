@@ -14,6 +14,7 @@ const MovieList = (props: MovieListProps) => {
             {props.movies.map((movie, index) => (
                 <div key={index} className='movie-card' >
                     <img src={movie.Poster} alt={`${movie.Title} poster`} />
+                    <button>Add to favourites</button> {/*This add to favourite button will be needed to add the movie to the favourite list*/}
                 </div>
             ))}
         </div>

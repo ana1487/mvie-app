@@ -18,13 +18,15 @@
         grid-template-columns: repeat(3, 1fr); //three rows when screen is average
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
         grid-template-columns: repeat(2, 1fr); //two rows when screen is small
+        gap: 12px;
 
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 480px) {
         grid-template-columns: repeat(1, 1fr); //Only one row when screen is very small
+        gap: 10px;
     }
 }
 
@@ -43,9 +45,6 @@
     img {
         width: 100%; // takes full card size
         height: auto; //maintains the aspect ratio
-        border-radius: 5px;
+        border-radius: 8px;
     }
 }
-
-/* Pagination styles */
-//will be added as per need after doing api calls
