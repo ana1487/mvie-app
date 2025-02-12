@@ -65,7 +65,7 @@ Implement remaining frontend tasks for which the notes are present below.
 {/**
     NOTE: The favorites will have to be added into database to track favourites 
             Step 1: Make the OMDB API connection in Home.tsx file. 
-            Step 2: 
+            Step 2: MovieList will need to do OMDB api call to open Modal based on imdbID of movie.
             Step 3: Add to favourites button in MovieList.tsx file
             Steps 4: Based on the favourites button call from backend and render to Favourites.tsx page
             Steps 5: Make the delete button to remove the favourites from the list and update to the backend database
