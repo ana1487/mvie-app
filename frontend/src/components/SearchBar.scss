@@ -1,0 +1,35 @@
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100px;
+}
+
+.search__input {
+    width: 580px;
+    padding: 12px 40px 12px 12px;
+    /* Add padding for the icon */
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    background-image: url("../assets/search.svg");
+    /* Inline SVG for search icon */
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; //transition effect for the border and box shadow.
+
+    &:focus {
+        outline: none; //when focused we remove the outline border
+        border-color: #509df0;
+        /* Highlight color on focus */
+        box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4); //adds border line shadow when focused
+        /* Enhance shadow on focus */
+    }
+
+    &::placeholder {
+        color: #ed8626;
+        /*  Placeholder text color */
+    }
+}
