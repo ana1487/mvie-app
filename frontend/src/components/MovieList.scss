@@ -31,6 +31,11 @@
 }
 
 .movie-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%; //ensures all heights will be same
     border: 1px solid #ccc; //adds a 1px border around each movie card
     padding: 10px; //adds 10px padding inside each movie card
     border-radius: 5px; //adds a 5px border radius to each movie card
@@ -46,5 +51,38 @@
         width: 100%; // takes full card size
         height: auto; //maintains the aspect ratio
         border-radius: 8px;
+        flex-grow: 1; //makes the image take up the remaining space
+        margin-bottom: 4px;
+    }
+
+    .btn-fav {
+        width: 80%;
+        text-align: center;
+        margin-top: auto; //pushes the button to the bottom of the card
+        margin-bottom: 10px; //adds a 10px margin below the button
+    }
+}
+
+.btn-fav {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #ff9800;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+
+    &:hover {
+        background-color: #f57c00;
+        transform: scale(1.05);
+    }
+
+    &:active {
+        background-color: #cc7700;
+        transform: scale(0.95);
     }
 }
