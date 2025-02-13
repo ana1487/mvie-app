@@ -14,6 +14,18 @@ function Home() {
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
     const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
+    //This will only add movies with valid link for posters
+    //Challenge: I have to understand how Promise works in order to understand this function fulyl
+    const isValidImage = (url: string): Promise<boolean> => {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = url;
+        });
+    };
+
+    //Fecth movies from omdbapi won't guarantee there's gonna be 10 results because we will filter out movies without valid posters
     const fetchMovies = async (searchQuery: string = 'batman') => {
         try {
             const response = await axios.get(
@@ -23,7 +35,16 @@ function Home() {
                     apikey: import.meta.env.VITE_OMDB_API_KEY
                 }
             });
-            setMovies(response.data.Search || []);
+            const movies = response.data.Search || [];
+            //Will have to filter if there is a poster image that works first
+            const moviesWithValidPosters = [];
+            for (const movie of movies) {
+                const isValid = await isValidImage(movie.Poster);
+                if (isValid) {
+                    moviesWithValidPosters.push(movie);
+                }
+            }
+            setMovies(moviesWithValidPosters); //only setting movies with valid posters as our app relies on poster to showcase movies
         } catch (error) {
             console.error('Error fetching movies:', error);
         }

@@ -54,4 +54,52 @@ nav {
             }
         }
     }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .title {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+
+            li {
+                width: 100%;
+
+                a {
+                    display: block;
+                    width: 100%;
+                    padding: 10px 0;
+                    text-align: left;
+                    font-size: 1.2em;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .title {
+            font-size: 1.5em;
+        }
+
+        ul {
+            gap: 5px;
+
+            li {
+                a {
+                    font-size: 1em;
+                }
+            }
+        }
+    }
 }

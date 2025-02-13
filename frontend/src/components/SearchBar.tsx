@@ -12,7 +12,7 @@ const SearchBar = (props: SearchBarProps) => {
             if (query) {
                 props.fetchMovies(query);
             }
-        }, 700);
+        }, 500);
         return () => clearTimeout(delayCall);
     }, [query, props.fetchMovies]);
 
