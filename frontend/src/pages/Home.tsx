@@ -3,16 +3,26 @@ import MovieList from '../components/MovieList.tsx';
 import { Movie } from '../types/Movie.ts';
 import SearchBar from '../components/SearchBar.tsx';
 import Pagination from '../components/Pagination.tsx';
+import '../components/LoadingSpinner.scss'
 import axios from 'axios';
 
 function Home() {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const moviesPerPage = 6; // Two rows with three items per row
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const indexOfLastMovie = currentPage * moviesPerPage;
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
     const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+
+    const LoadingSpinner = () => (
+        <div className="loading-spinner">
+            <div className="spinner"></div>
+        </div>
+    );
+
+
 
     //This will only add movies with valid link for posters
     //Challenge: I have to understand how Promise works in order to understand this function fulyl
@@ -27,6 +37,7 @@ function Home() {
 
     //Fecth movies from omdbapi won't guarantee there's gonna be 10 results because we will filter out movies without valid posters
     const fetchMovies = async (searchQuery: string = 'batman') => {
+        setIsLoading(true);
         try {
             const response = await axios.get(
                 `http://omdbapi.com/`, {
@@ -47,6 +58,8 @@ function Home() {
             setMovies(moviesWithValidPosters); //only setting movies with valid posters as our app relies on poster to showcase movies
         } catch (error) {
             console.error('Error fetching movies:', error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -57,12 +70,20 @@ function Home() {
     return (
         <div>
             <SearchBar setMovies={setMovies} fetchMovies={fetchMovies} />
-            <MovieList movies={currentMovies} />
-            <Pagination totalMovies={movies.length}
-                moviesPerPage={moviesPerPage}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-            />
+            {isLoading ? (
+                <LoadingSpinner />
+            ) : (
+
+                <>
+                    < MovieList movies={currentMovies} />
+                    <Pagination totalMovies={movies.length}
+                        moviesPerPage={moviesPerPage}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
+
+                </>
+            )}
         </div>
     );
 }
