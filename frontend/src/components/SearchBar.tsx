@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './SearchBar.scss';
-import { Movie } from '../types/Movie';
+import { SearchBarProps } from '../types/SearchBarProps';
 
-interface SearchBarProps {
-    setMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
-    fetchMovies: (searchQuery: string) => Promise<void>;
-}
 
-const SearchBar: React.FC<SearchBarProps> = ({ setMovies, fetchMovies }) => {
+
+const SearchBar = (props: SearchBarProps) => {
     const [query, setQuery] = useState('');
 
     useEffect(() => {
         const delayCall = setTimeout(() => {
             if (query) {
-                fetchMovies(query);
+                props.fetchMovies(query);
             }
         }, 700);
         return () => clearTimeout(delayCall);
-    }, [query, fetchMovies]);
+    }, [query, props.fetchMovies]);
 
     return (
         <div className='search'>

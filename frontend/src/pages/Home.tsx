@@ -28,7 +28,6 @@ function Home() {
                 }
             }
             );
-
             setMovies(response.data.Search || []);
         } catch (error) {
             console.error('Error fetching movies:', error);
