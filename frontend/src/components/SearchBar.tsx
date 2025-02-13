@@ -19,8 +19,8 @@ const SearchBar = (props: SearchBarProps) => {
     const debouncedFetchMovies = useCallback(debounce(props.fetchMovies, 500), [props.fetchMovies]);
 
     useEffect(() => {
-        if (query) {
-            debouncedFetchMovies(query);
+        if (query.trim()) {
+            debouncedFetchMovies(query.trim());
         }
     }, [query, debouncedFetchMovies]);
 
