@@ -11,6 +11,8 @@ function Home() {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const moviesPerPage = 6; // Two rows with three items per row
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
+    const [noResults, setNoResults] = useState<boolean>(false);
 
     const indexOfLastMovie = currentPage * moviesPerPage;
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
@@ -22,10 +24,6 @@ function Home() {
         </div>
     );
 
-
-
-    //This will only add movies with valid link for posters
-    //Challenge: I have to understand how Promise works in order to understand this function fulyl
     const isValidImage = (url: string): Promise<boolean> => {
         return new Promise((resolve) => {
             const img = new Image();
@@ -35,9 +33,10 @@ function Home() {
         });
     };
 
-    //Fecth movies from omdbapi won't guarantee there's gonna be 10 results because we will filter out movies without valid posters
-    const fetchMovies = async (searchQuery: string = 'batman') => {
-        setIsLoading(true);
+    const fetchMovies = async (searchQuery: string = 'batman', showLoading: boolean = true) => {
+        if (showLoading) {
+            setIsLoading(true);
+        }
         try {
             const response = await axios.get(
                 `http://omdbapi.com/`, {
@@ -47,7 +46,6 @@ function Home() {
                 }
             });
             const movies = response.data.Search || [];
-            //Will have to filter if there is a poster image that works first
             const moviesWithValidPosters = [];
             for (const movie of movies) {
                 const isValid = await isValidImage(movie.Poster);
@@ -55,33 +53,42 @@ function Home() {
                     moviesWithValidPosters.push(movie);
                 }
             }
-            setMovies(moviesWithValidPosters); //only setting movies with valid posters as our app relies on poster to showcase movies
+            setMovies(moviesWithValidPosters);
+            setNoResults(moviesWithValidPosters.length === 0);
         } catch (error) {
             console.error('Error fetching movies:', error);
+            setNoResults(true);
         } finally {
-            setIsLoading(false);
+            if (showLoading) {
+                setIsLoading(false);
+            }
+            setIsInitialLoad(false);
         }
     };
 
     useEffect(() => {
-        fetchMovies();
+        fetchMovies('batman', true);
     }, []);
 
     return (
         <div>
-            <SearchBar setMovies={setMovies} fetchMovies={fetchMovies} />
-            {isLoading ? (
+            <SearchBar setMovies={setMovies} fetchMovies={(query) => fetchMovies(query, false)} />
+            {isLoading && isInitialLoad ? (
                 <LoadingSpinner />
             ) : (
-
                 <>
-                    < MovieList movies={currentMovies} />
-                    <Pagination totalMovies={movies.length}
-                        moviesPerPage={moviesPerPage}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                    />
-
+                    {noResults ? (
+                        <div>No results found</div>
+                    ) : (
+                        <>
+                            <MovieList movies={currentMovies} />
+                            <Pagination totalMovies={movies.length}
+                                moviesPerPage={moviesPerPage}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            />
+                        </>
+                    )}
                 </>
             )}
         </div>

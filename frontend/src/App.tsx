@@ -5,6 +5,8 @@ import Favourites from './pages/Favourites.tsx';
 import Header from './components/Header.tsx';
 import './App.css';
 
+
+
 const App = () => {
   return (
     <>
