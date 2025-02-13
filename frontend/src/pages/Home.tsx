@@ -5,19 +5,15 @@ import SearchBar from '../components/SearchBar.tsx';
 import Pagination from '../components/Pagination.tsx';
 import axios from 'axios';
 
-
 function Home() {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const moviesPerPage = 6; //can be changed to fit more movies in a page or less as needed
+    const moviesPerPage = 6; // Two rows with three items per row
 
     const indexOfLastMovie = currentPage * moviesPerPage;
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
     const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
-
-    //I have included the default search to be batman
-    //Since the get request only gives 10 movies at a time, i will limit one page to have 6 movie posters
     const fetchMovies = async (searchQuery: string = 'batman') => {
         try {
             const response = await axios.get(
@@ -26,17 +22,16 @@ function Home() {
                     s: searchQuery,
                     apikey: import.meta.env.VITE_OMDB_API_KEY
                 }
-            }
-            );
+            });
             setMovies(response.data.Search || []);
         } catch (error) {
             console.error('Error fetching movies:', error);
         }
     };
+
     useEffect(() => {
         fetchMovies();
     }, []);
-
 
     return (
         <div>
