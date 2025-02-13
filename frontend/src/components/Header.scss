@@ -1,41 +1,56 @@
 nav {
-    display: flex; //Flex container 
-    justify-content: space-between; //Use this to make the children elements spread out
-    align-items: center; //makes the items align in the center of the container along the cross axis
-    padding: 10px 20px; //padding top and bottom 10px, left and right 20px 
-    background-color: #333; //background color will be a bit less darker
+    display: flex; // Flex container 
+    justify-content: space-between; // Use this to make the children elements spread out
+    align-items: center; // Makes the items align in the center of the container along the cross axis
+    padding: 10px 20px; // Padding top and bottom 10px, left and right 20px 
+    background-color: #333; // Background color will be a bit less darker
     color: white;
 
     .title {
-        font-size: 2.5em; //font size 2.5em means on the basis of the parent element font size it will be 2.5 times bigger
+        font-size: 2.5em; // Font size 2.5em means on the basis of the parent element font size it will be 2.5 times bigger
         font-weight: bold;
-        background: linear-gradient(to right, orange 61.5%, white 50%); //forms a gradient from orange to white
-        -webkit-background-clip: text; // makes use of the text as a mask for the background
+        background: linear-gradient(to right, orange 61.5%, white 50%); // Forms a gradient from orange to white
+        -webkit-background-clip: text; // Makes use of the text as a mask for the background
         -webkit-text-fill-color: transparent;
 
         .bg-color {
-            padding: 0 0.2em; //padding top and bottom 0, left and right 0.2em
-            background-color: rgba(255, 255, 255, 0.5); //background color will be a bit less darker
+            padding: 0 0.2em; // Padding top and bottom 0, left and right 0.2em
+            background-color: rgba(255, 255, 255, 0.5); // Background color will be a bit less darker
             color: white;
         }
-
     }
 
     ul {
-        display: flex; //list items will follow flex container style
-        list-style: none; //means there won't be any kind of styles for list items
-        gap: 20px; //gap between the list items will be 20px #TODO: implement to increase this or decrease this as per need when making the site responsive
+        display: flex; // List items will follow flex container style
+        list-style: none; // Means there won't be any kind of styles for list items
+        gap: 20px; // Gap between the list items will be 20px #TODO: implement to increase this or decrease this as per need when making the site responsive
         margin: 0;
         padding: 0;
 
         li {
             a {
                 color: white;
-                text-decoration: none; //no underline for the text
+                text-decoration: none; // No underline for the text
+                font-size: 1.2em; // Increase the font size of the list elements
+                transition: all 0.3s ease; // Smooth transition for hover effects
 
                 &:hover {
-                    text-decoration: underline; //adds underline when the list is being hovered
+                    text-decoration: underline; // Adds underline when the list is being hovered
                 }
+            }
+
+            /* Specific hover effect for Home */
+            &.home a:hover {
+                font-size: 1.4em; // Make the text bigger on hover
+                color: orange; // Change the color to orange
+                transform: scale(1.1); // Slightly scale up the element
+            }
+
+            /* Specific hover effect for Favorites */
+            &.favorites a:hover {
+                font-size: 1.4em; // Make the text bigger on hover
+                color: orange; // Change the color to orange
+                transform: scale(1.1); // Slightly scale up the element
             }
         }
     }

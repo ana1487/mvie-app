@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Movie } from '../types/Movie.ts';
 import './MovieList.scss';
 
@@ -7,7 +7,7 @@ interface MovieListProps {
 }
 
 const MovieList = (props: MovieListProps) => {
-    const [favourites, setFavourites] = React.useState<Movie[]>([]);
+    const [favourites, setFavourites] = useState<Movie[]>([]);
 
     const addfavFunc = () => {
         //This function will be used to add the movie to the favourite list

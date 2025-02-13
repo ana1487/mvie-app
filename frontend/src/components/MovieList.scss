@@ -2,7 +2,7 @@
 
 .movie-list-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); //ensures 5 rows of equal width when default size
+    grid-template-columns: repeat(3, 1fr); //ensures 5 rows of equal width when default size
     gap: 20px; //adds a 20px gap between each movie card
     justify-content: center;
     padding: 20px; //adds 20px padding around the movie list
@@ -10,12 +10,12 @@
 
     //These wil handle columns when the screen size is reduced
     @media (max-width: 1200px) {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         /* 4 items per row on smaller screens */
     }
 
     @media (max-width: 900px) {
-        grid-template-columns: repeat(3, 1fr); //three rows when screen is average
+        grid-template-columns: repeat(2, 1fr); //three rows when screen is average
     }
 
     @media (max-width: 768px) {
@@ -40,7 +40,7 @@
     padding: 10px; //adds 10px padding inside each movie card
     border-radius: 5px; //adds a 5px border radius to each movie card
     text-align: center; //centers the text inside each movie card
-    background-color: #fff;
+    background-color: #ad9191;
     transition: transform 0.3s ease-in-out; //adds a smooth transition effect when hovering over a movie card
 
     &:hover {
