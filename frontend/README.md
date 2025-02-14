@@ -72,9 +72,14 @@ Implement remaining frontend tasks for which the notes are present below.
             Step 6: Decide which database and how to store the favourites and the tech stack.
 
             Challenge: I'm not familiar with MongoDB and Express setup. So, might need to rely on Laravel with postgres in the last minute
-            -> Will need to learn MongoDB and Express in the next 2 days to implement the favourites feature properly
+            -> Will need to learn MongoDB and Express in the next 2 days to implement the favourites feature properly (DOING THIS)
             -> Go back into the backend and implement the favourites feature using Laravel.
             */}
+
+            FEB 14: 
+                        Made apis for backend work.
+                      1. WORK on Favourites page in the Frontend setting now. (6PM-11PM)
+
 
 FEB 15: 
 Target: DEPLOY into Vercel or HEROKU depending on the backend choice.
