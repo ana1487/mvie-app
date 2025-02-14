@@ -29,7 +29,23 @@ const getFavouriteById = async (req: Request, res: Response): Promise<void> => {
 
 // Adding a new favourite using POST call /api/favourites
 const addFavourite = async (req: Request, res: Response): Promise<void> => {
+    // try {
+    //     const newFavourite = new Favourite(req.body);
+    //     const savedFavourite = await newFavourite.save();
+    //     res.status(201).json(savedFavourite);
+    // } catch (error) {
+    //     console.error(error);
+    //     res.status(500).json({ message: 'Server Error' });
+    // }
+
     try {
+        const { imdbID } = req.body;
+        const existingFavourite = await Favourite.findOne({ imdbID });
+
+        if (existingFavourite) {
+            res.status(400).json({ message: 'Movie is already in favourites' });
+            return;
+        }
         const newFavourite = new Favourite(req.body);
         const savedFavourite = await newFavourite.save();
         res.status(201).json(savedFavourite);

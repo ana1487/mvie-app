@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const favouritesSchema = new mongoose.Schema({
     imdbID: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     Title: {
         type: String,
