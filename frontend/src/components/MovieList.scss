@@ -151,3 +151,10 @@
         transform: scale(0.95);
     }
 }
+
+.btn-fav.in-favourites {
+    background-color: #ffcc00;
+    color: #fff;
+    cursor: default;
+    pointer-events: none;
+}
