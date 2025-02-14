@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import favoritesRouter from './routes/favourites.ts';
+import favoritesRouter from './routes/favorites';
 
 dotenv.config();
 
@@ -34,3 +34,4 @@ app.get('/', (req: Request, res: Response) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
