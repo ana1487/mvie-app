@@ -32,7 +32,8 @@ const MovieList = (props: MovieListProps) => {
         console.log(movie);
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/favourites`, movie);
-            console.log('Movie added to favourites:', response.data);
+            //console.log('Movie added to favourites:', response.data);
+            console.log('no errors while uploading into your favourites')
             setAddedFavourites(new Set(addedFavourites).add(movie.imdbID));
         } catch (error) {
             console.error('Error adding movie to favourites:', error);
@@ -50,7 +51,8 @@ const MovieList = (props: MovieListProps) => {
                 }
             });
             setSelectedMovieDetails(response.data);
-            console.log(response.data);
+            // console.log(response.data);
+            console.log("The movie details are being fetched well")
 
         } catch (error) {
             console.error("Error fetching movie details:", error);
