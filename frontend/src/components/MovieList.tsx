@@ -6,6 +6,7 @@ import axios from 'axios';
 
 interface MovieListProps {
     movies: Movie[];
+    removeFavFunc?: (imdbID: string) => void;
 }
 
 const MovieList = (props: MovieListProps) => {
@@ -99,20 +100,32 @@ const MovieList = (props: MovieListProps) => {
                                 </div>
                             )}
                             {/* Add to favourites button */}
-                            {isAddedToFavourites ? (
-                                <button className="btn-fav in-favourites">
-                                    In your Favourites
-                                </button>
-                            ) : (
+                            {props.removeFavFunc ? (
                                 <button
-                                    className="btn-fav"
+                                    className="btn-fav remove-fav"
                                     onClick={(e) => {
-                                        e.stopPropagation(); // Prevent triggering the image click event
-                                        addfavFunc(movie)
+                                        e.stopPropagation();
+                                        props.removeFavFunc!(movie.imdbID);
                                     }}
                                 >
-                                    Add to Favourites
+                                    Remove from Favourites
                                 </button>
+                            ) : (
+                                isAddedToFavourites ? (
+                                    <button className="btn-fav in-favourites">
+                                        In your Favourites
+                                    </button>
+                                ) : (
+                                    <button
+                                        className="btn-fav"
+                                        onClick={(e) => {
+                                            e.stopPropagation(); // Prevent triggering the image click event
+                                            addfavFunc(movie)
+                                        }}
+                                    >
+                                        Add to Favourites
+                                    </button>
+                                )
                             )}
                         </div>
                     </div>

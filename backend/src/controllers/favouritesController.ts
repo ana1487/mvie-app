@@ -29,15 +29,6 @@ const getFavouriteById = async (req: Request, res: Response): Promise<void> => {
 
 // Adding a new favourite using POST call /api/favourites
 const addFavourite = async (req: Request, res: Response): Promise<void> => {
-    // try {
-    //     const newFavourite = new Favourite(req.body);
-    //     const savedFavourite = await newFavourite.save();
-    //     res.status(201).json(savedFavourite);
-    // } catch (error) {
-    //     console.error(error);
-    //     res.status(500).json({ message: 'Server Error' });
-    // }
-
     try {
         const { imdbID } = req.body;
         const existingFavourite = await Favourite.findOne({ imdbID });
@@ -55,10 +46,10 @@ const addFavourite = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-// Deleting a favourite by ID using DELETE /api/favourites/:id
+// Deleting a favourite by imdbID using DELETE /api/favourites/:imdbID
 const deleteFavourite = async (req: Request, res: Response): Promise<void> => {
     try {
-        const favourite = await Favourite.findByIdAndDelete(req.params.id);
+        const favourite = await Favourite.findOneAndDelete({ imdbID: req.params.imdbID });
         if (!favourite) {
             res.status(404).json({ message: 'Favourite not found' });
             return;
