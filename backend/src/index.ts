@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import favoritesRouter from './routes/favorites';
+import favouritesRouter from './routes/favourites';
 
 dotenv.config();
 
@@ -15,13 +15,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-app.use('/api/favorites', favoritesRouter);
+app.use('/api/favorites', favouritesRouter);
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI!, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URI!)
     .then(() => console.log('MongoDB connected'))
     .catch((err) => console.error('MongoDB connection error:', err));
 
