@@ -11,11 +11,12 @@ const MovieList = (props: MovieListProps) => {
     const [favourites, setFavourites] = useState<Movie[]>([]);
     const [selectedMovieDetails, setSelectedMovieDetails] = useState<any>(null);
 
-    const addfavFunc = (id: string) => {
-        console.log(id);
+    const addfavFunc = (movie: Movie) => {
+        console.log(movie);
         //This function will be used to add the movie to the favourite list
         //We will need to implement this function in the next step
         // setFavourites([...favourites, prop.movies.map((movie, index) => movie)]);
+        //should I just push the favourites one by one uor use states? Main question
     }
 
     const openDetail = async (id: string) => {
@@ -94,7 +95,7 @@ const MovieList = (props: MovieListProps) => {
                                 className="btn-fav"
                                 onClick={(e) => {
                                     e.stopPropagation(); // Prevent triggering the image click event
-                                    addfavFunc(movie.imdbID);
+                                    addfavFunc(movie)
                                 }}
                             >
                                 Add to favourites
