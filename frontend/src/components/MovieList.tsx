@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Movie } from '../types/Movie.ts';
+
 import './MovieList.scss';
 import axios from 'axios';
 
@@ -8,15 +9,33 @@ interface MovieListProps {
 }
 
 const MovieList = (props: MovieListProps) => {
-    const [favourites, setFavourites] = useState<Movie[]>([]);
     const [selectedMovieDetails, setSelectedMovieDetails] = useState<any>(null);
+    const [addedFavourites, setAddedFavourites] = useState<Set<string>>(new Set());
 
-    const addfavFunc = (movie: Movie) => {
+    useEffect(() => {
+        const fetchFavourites = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/favourites`);
+                const favouriteMovies = response.data;
+                const favouriteMovieIDs: Set<string> = new Set(favouriteMovies.map((movie: Movie) => movie.imdbID));
+                setAddedFavourites(favouriteMovieIDs);
+            } catch (error) {
+                console.error('Error fetching favourite movies:', error);
+            }
+        };
+
+        fetchFavourites();
+    }, []);
+
+    const addfavFunc = async (movie: Movie) => {
         console.log(movie);
-        //This function will be used to add the movie to the favourite list
-        //We will need to implement this function in the next step
-        // setFavourites([...favourites, prop.movies.map((movie, index) => movie)]);
-        //should I just push the favourites one by one uor use states? Main question
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/favourites`, movie);
+            console.log('Movie added to favourites:', response.data);
+            setAddedFavourites(new Set(addedFavourites).add(movie.imdbID));
+        } catch (error) {
+            console.error('Error adding movie to favourites:', error);
+        }
     }
 
     const openDetail = async (id: string) => {
@@ -35,25 +54,14 @@ const MovieList = (props: MovieListProps) => {
         } catch (error) {
             console.error("Error fetching movie details:", error);
         }
-
-
     }
 
 
     return (
-        //added a div with a class name of movie-list-container to style the movie list
-        // <div className='movie-list-container'>
-        //     {/*We could also get rid of the props but its okay for now.  */}
-        //     {props.movies.map((movie, index) => (
-        //         <div key={index} className='movie-card' >
-        //             <img onClick={() => openDetail(movie.imdbID)} src={movie.Poster} alt={`${movie.Title} poster`} />
-        //             <button className="btn-fav" onClick={() => addfavFunc(movie.imdbID)}>Add to favourites</button> {/*This add to favourite button will be needed to add the movie to the favourite list*/}
-        //         </div>
-        //     ))}
-        // </div>
         <div className='movie-list-container'>
             {props.movies.map((movie, index) => {
                 const isMovieSelected = selectedMovieDetails?.imdbID === movie.imdbID;
+                const isAddedToFavourites = addedFavourites.has(movie.imdbID);
                 return (
                     <div key={index} className="movie-card">
                         {/* Image container */}
@@ -91,15 +99,21 @@ const MovieList = (props: MovieListProps) => {
                                 </div>
                             )}
                             {/* Add to favourites button */}
-                            <button
-                                className="btn-fav"
-                                onClick={(e) => {
-                                    e.stopPropagation(); // Prevent triggering the image click event
-                                    addfavFunc(movie)
-                                }}
-                            >
-                                Add to favourites
-                            </button>
+                            {isAddedToFavourites ? (
+                                <button className="btn-fav in-favourites">
+                                    In your Favourites
+                                </button>
+                            ) : (
+                                <button
+                                    className="btn-fav"
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Prevent triggering the image click event
+                                        addfavFunc(movie)
+                                    }}
+                                >
+                                    Add to Favourites
+                                </button>
+                            )}
                         </div>
                     </div>
                 );
