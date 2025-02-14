@@ -1,0 +1,27 @@
+.favourites-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7vh;
+    background-color: #40413e;
+
+    .title {
+        font-size: 2rem;
+        font-weight: 900;
+        color: #fcaf0b;
+        animation: fadeIn 2s ease-in-out;
+
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0.3;
+            transform: translateY(-20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}

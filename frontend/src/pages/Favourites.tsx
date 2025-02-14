@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MovieList from '../components/MovieList.tsx';
 import { Movie } from '../types/Movie.ts';
+import FavouritesList from '../components/FavouritesList.tsx';
 import axios from 'axios';
 
 function Favourites() {
@@ -37,10 +38,15 @@ function Favourites() {
 
     return (
         <div>
+
             {isLoading ? (
-                <div>Loading...</div>
+                <>
+                    <FavouritesList />
+                    <div>Loading...</div>
+                </>
             ) : (
                 <>
+                    <FavouritesList />
                     {noResults ? (
                         <div>No favourite movies found</div>
                     ) : (
