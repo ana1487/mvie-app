@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Movie } from '../types/Movie.ts';
 
 import './MovieList.scss';
