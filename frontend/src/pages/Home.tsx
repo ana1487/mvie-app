@@ -39,7 +39,7 @@ function Home() {
         }
         try {
             const response = await axios.get(
-                `http://omdbapi.com/`, {
+                `https://omdbapi.com/`, {
                 params: {
                     s: searchQuery,
                     apikey: import.meta.env.VITE_OMDB_API_KEY

@@ -45,7 +45,7 @@ const MovieList = (props: MovieListProps) => {
         //This function will basically pull the information of the movie and display it in a modal
         //will need to do api call to OMDB here.
         try {
-            const response = await axios.get(`http://omdbapi.com/`, {
+            const response = await axios.get(`https://omdbapi.com/`, {
                 params: {
                     i: id,
                     apikey: import.meta.env.VITE_OMDB_API_KEY
