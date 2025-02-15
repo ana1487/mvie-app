@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import './Pagination.scss';
 import { PaginationProps } from '../types/Pagination.ts';
 

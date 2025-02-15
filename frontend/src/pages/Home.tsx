@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import MovieList from '../components/MovieList.tsx';
 import { Movie } from '../types/Movie.ts';
 import SearchBar from '../components/SearchBar.tsx';

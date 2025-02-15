@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Movie } from '../types/Movie.ts';
 
 import './MovieList.scss';
@@ -32,8 +32,9 @@ const MovieList = (props: MovieListProps) => {
         console.log(movie);
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/favourites`, movie);
-            //console.log('Movie added to favourites:', response.data);
+            console.log('Movie added to favourites:', response.data);
             console.log('no errors while uploading into your favourites')
+
             setAddedFavourites(new Set(addedFavourites).add(movie.imdbID));
         } catch (error) {
             console.error('Error adding movie to favourites:', error);
