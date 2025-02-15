@@ -12,7 +12,8 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/index.html"
+            "dest": "/src/main.tsx"
+            // revert this to '/index.htm, just changing the code to see what happensl'
         }
     ]
 }
