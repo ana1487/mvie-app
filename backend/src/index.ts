@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-app.use('/api/favorites', favouritesRouter);
+app.use('/api/favourites', favouritesRouter); //there was a typo here. Might need to revert back to /api/favorites if code gets error...
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI!)
