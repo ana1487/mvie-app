@@ -14,5 +14,9 @@
             "src": "/(.*)",
             "dest": "/index.html"
         }
-    ]
+    ],
+    "env": {
+        "VITE_OMDB_API_KEY": "@vite_omdb_api_key",
+        "VITE_BACKEND_URL": "@vite_backend_url"
+    }
 }
