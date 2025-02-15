@@ -5,7 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+    target: 'esnext',
   },
-  base: '/', // Ensure the base path is set correctly for Vercel deployment
+  base: '/',
 })
